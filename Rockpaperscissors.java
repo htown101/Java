@@ -29,6 +29,7 @@ public class Rockpaperscissors
         CompSelection = "";
         Scanner in = new Scanner(System.in);
         Welcome();
+        Rules();
         System.out.println("Would you like to play (y/n)? ");
         answer = in.next();
         while (answer.equals("y") || (answer.equals("Y")))
@@ -72,9 +73,17 @@ public class Rockpaperscissors
 public static void Welcome()
 {
     System.out.println("Welcome to Rock,Paper,Scissors!!!");
+    System.out.println();
 }
 
-
+public static void Rules()
+{
+    System.out.println("Player 1 chooses r-rock, p-paper, s-scissors, q-quit");
+    System.out.println("Rock beats scissors, paper beats rock, and scissors cuts paper.");
+}
+// Method to Determine who won. 
+// Parameters: User input and computer input Strings
+// Returns: String - either Player 1 or Computer
 public static String DetermineWinner(String selection, String CompSelection)
 { 
     if (selection.equals("r") && CompSelection.equals("p")|| selection.equals("p")&& CompSelection.equals("r") )
