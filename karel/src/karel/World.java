@@ -1,11 +1,10 @@
 package karel;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.util.ArrayList;
-import javax.swing.JPanel;
+import java.awt.*;
+import java.util.*;
+import javax.swing.*;
 /**
- * Karel the Robot
+ * Karel
  * Current version has 1 predefined map
  * @author Heather,Noel,Sam,Amber,Josh,MacsR4Luzrs
  */
@@ -18,7 +17,7 @@ public class World extends JPanel
     private ArrayList gems = new ArrayList(); //gems in world
     private ArrayList areas = new ArrayList(); //floors
     private boolean isRunning = true; //game ending bool
-    Wall home = new Wall(0,0); // home space
+    private home Home; 
     protected Player karel; //object for karel 
     private int w = 18;
     private int h = 14;
@@ -37,7 +36,7 @@ public class World extends JPanel
             + "#     $#####$     #\n"
             + "#    $#######$    #\n"
             + "#   $#########$   #\n"
-            + "# ^ ###########   #\n"
+            + "# ^ ###########  @#\n"
             + "###################\n";
     
     //Constructor - Set up world
@@ -57,7 +56,6 @@ public class World extends JPanel
         return this.h;
     }
 
-    
     //Reads the map and adds all objects and their coordinates to arraylists
     public final void initWorld()
     {
@@ -106,7 +104,8 @@ public class World extends JPanel
                 a = new Area(x, y);
                 areas.add(a);
                 x += SPACE;
-            } else if (item == '^') 
+            } 
+            else if (item == '^') 
             {
                 karel = new Player(x,y);
                 x += SPACE;
@@ -115,8 +114,12 @@ public class World extends JPanel
             {
                 x += SPACE;
             }
-
-            h = y;
+            else if (item == '@')
+            {
+                 Home = new home(x,y);   
+                 x += SPACE;
+            }
+            //home_square = y;
         }
         
    }
@@ -131,7 +134,7 @@ public class World extends JPanel
         world.addAll(areas);
         world.addAll(gems);
         world.add(karel);
-        
+        world.add(Home);
         for (int i = 0; i < areas.size(); i++)
         {
             Entity item = (Entity) areas.get(i);
@@ -142,7 +145,7 @@ public class World extends JPanel
 
             Entity item = (Entity) world.get(i);
 
-            if ((item instanceof Player)|| (item instanceof Gem)) 
+            if ((item instanceof Player) || (item instanceof Gem) || item instanceof home) 
             {
                 g.drawImage(item.getImage(), item.GetX(), item.GetY(), this);
             } 
@@ -252,14 +255,14 @@ public class World extends JPanel
         {
             //collided with wall - do not move karel
         }
-        else if (karel.isHomeCollision(newX,newY,home))
+        else if (karel.isHomeCollision(newX,newY,Home))
         {
             //if karel is home and all gems are taken, move and end game
             if(gems.isEmpty())
             {
                 karel.move(x,y);
                 isRunning = false;
-                System.out.println("You have won!");
+                //System.out.println("You have won!");
             }
         }
         else if (karel.isGemCollision(newX, newY, gems) != -1)

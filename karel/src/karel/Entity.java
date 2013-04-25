@@ -1,5 +1,5 @@
 package karel;
-import java.awt.Image;
+import java.awt.*;
 import java.util.*;
 //Primary class for all objects that will appear in world
 
@@ -91,16 +91,12 @@ public class Entity
         return -1;
     }
     
-    public boolean isHomeCollision(int x, int y, Wall home)
-    {   
-        Gem tempGem;
-        int number;
-        
-        if((home.x == x && home.y == y))
+    public boolean isHomeCollision(int x, int y,home Home)
+    {       
+        if ( Home.x == x && Home.y == y)
         {
-           return true;
-        }
-        
+            return true; 
+        }     
         return false;
     }
 }

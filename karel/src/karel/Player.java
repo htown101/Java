@@ -1,8 +1,8 @@
 package karel;
 
-import java.awt.Image;
-import java.net.URL;
-import javax.swing.ImageIcon;
+import java.awt.*;
+import java.net.*;
+import javax.swing.*;
 
 public class Player extends Entity
 {
@@ -12,7 +12,6 @@ public class Player extends Entity
     {
         super(x, y);
         direction ='^';
-
         URL loc = this.getClass().getResource("up.png");
         ImageIcon iia = new ImageIcon(loc);
         Image image = iia.getImage();

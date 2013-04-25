@@ -1,15 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package karel;
-/**
- *
- * @author Sam
- */
+
 public class Karel extends javax.swing.JFrame
 {
-    private final int OFFSET = 0;
     /**
      * Creates new form Karel
      */
@@ -20,10 +12,10 @@ public class Karel extends javax.swing.JFrame
         manualPanel.setVisible(true);
         buttonPanel.setVisible(false);
         InitUI();
-        
     }
     
-    public void InitUI() {
+    public void InitUI()
+    {
         //Board board = new Board();
         //add(board);
 
@@ -47,17 +39,19 @@ public class Karel extends javax.swing.JFrame
 
         mainContainer = new javax.swing.JPanel();
         topSubContainer = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        ButtonMode = new javax.swing.JButton();
+        ManualMode = new javax.swing.JButton();
+        Run = new javax.swing.JButton();
+        Stop = new javax.swing.JButton();
         bottomSubContainer = new javax.swing.JPanel();
         middleContainer = new javax.swing.JPanel();
         leftContainer = new javax.swing.JPanel();
         buttonPanel = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        GoButton = new javax.swing.JButton();
+        LeftButton = new javax.swing.JButton();
+        RightButton = new javax.swing.JButton();
+        GetButton = new javax.swing.JButton();
+        PutButton = new javax.swing.JButton();
         manualPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -67,7 +61,12 @@ public class Karel extends javax.swing.JFrame
         world = new karel.World();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        New = new javax.swing.JMenuItem();
+        Save = new javax.swing.JMenuItem();
+        Close = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1006, 550));
@@ -83,23 +82,27 @@ public class Karel extends javax.swing.JFrame
         topSubContainer.setMinimumSize(new java.awt.Dimension(100, 28));
         topSubContainer.setPreferredSize(new java.awt.Dimension(733, 28));
 
-        jButton3.setText("Button Mode");
-        jButton3.addActionListener(new java.awt.event.ActionListener()
+        ButtonMode.setText("Button Mode");
+        ButtonMode.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton3ActionPerformed(evt);
+                ButtonModeActionPerformed(evt);
             }
         });
 
-        jButton10.setText("Manual Mode");
-        jButton10.addActionListener(new java.awt.event.ActionListener()
+        ManualMode.setText("Manual Mode");
+        ManualMode.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton10ActionPerformed(evt);
+                ManualModeActionPerformed(evt);
             }
         });
+
+        Run.setText("Run");
+
+        Stop.setText("Stop");
 
         javax.swing.GroupLayout topSubContainerLayout = new javax.swing.GroupLayout(topSubContainer);
         topSubContainer.setLayout(topSubContainerLayout);
@@ -107,17 +110,23 @@ public class Karel extends javax.swing.JFrame
             topSubContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topSubContainerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3)
+                .addComponent(ButtonMode)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton10)
-                .addGap(0, 815, Short.MAX_VALUE))
+                .addComponent(ManualMode)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Run)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Stop)
+                .addGap(0, 693, Short.MAX_VALUE))
         );
         topSubContainerLayout.setVerticalGroup(
             topSubContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topSubContainerLayout.createSequentialGroup()
                 .addGroup(topSubContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton10))
+                    .addComponent(ButtonMode)
+                    .addComponent(ManualMode)
+                    .addComponent(Run)
+                    .addComponent(Stop))
                 .addGap(0, 3, Short.MAX_VALUE))
         );
 
@@ -153,48 +162,48 @@ public class Karel extends javax.swing.JFrame
 
         buttonPanel.setVisible(false);
 
-        jButton4.setText("Go");
-        jButton4.addActionListener(new java.awt.event.ActionListener()
+        GoButton.setText("Go");
+        GoButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton4ActionPerformed(evt);
+                GoButtonActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Left");
-        jButton5.addActionListener(new java.awt.event.ActionListener()
+        LeftButton.setText("Left");
+        LeftButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton5ActionPerformed(evt);
+                LeftButtonActionPerformed(evt);
             }
         });
 
-        jButton6.setText("Right");
-        jButton6.addActionListener(new java.awt.event.ActionListener()
+        RightButton.setText("Right");
+        RightButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton6ActionPerformed(evt);
+                RightButtonActionPerformed(evt);
             }
         });
 
-        jButton8.setText("Get");
-        jButton8.addActionListener(new java.awt.event.ActionListener()
+        GetButton.setText("Get");
+        GetButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton8ActionPerformed(evt);
+                GetButtonActionPerformed(evt);
             }
         });
 
-        jButton9.setText("Put");
-        jButton9.addActionListener(new java.awt.event.ActionListener()
+        PutButton.setText("Put");
+        PutButton.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton9ActionPerformed(evt);
+                PutButtonActionPerformed(evt);
             }
         });
 
@@ -206,35 +215,35 @@ public class Karel extends javax.swing.JFrame
                 .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(buttonPanelLayout.createSequentialGroup()
                         .addGap(61, 61, 61)
-                        .addComponent(jButton5)
+                        .addComponent(LeftButton)
                         .addGap(71, 71, 71)
-                        .addComponent(jButton6))
+                        .addComponent(RightButton))
                     .addGroup(buttonPanelLayout.createSequentialGroup()
                         .addGap(129, 129, 129)
-                        .addComponent(jButton4))
+                        .addComponent(GoButton))
                     .addGroup(buttonPanelLayout.createSequentialGroup()
                         .addGap(80, 80, 80)
-                        .addComponent(jButton8)
+                        .addComponent(GetButton)
                         .addGap(41, 41, 41)
-                        .addComponent(jButton9)))
+                        .addComponent(PutButton)))
                 .addContainerGap(149, Short.MAX_VALUE))
         );
 
-        buttonPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton4, jButton5, jButton6, jButton8, jButton9});
+        buttonPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {GetButton, GoButton, LeftButton, PutButton, RightButton});
 
         buttonPanelLayout.setVerticalGroup(
             buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buttonPanelLayout.createSequentialGroup()
                 .addGap(58, 58, 58)
-                .addComponent(jButton4)
+                .addComponent(GoButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
+                    .addComponent(LeftButton)
+                    .addComponent(RightButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8)
-                    .addComponent(jButton9))
+                    .addComponent(GetButton)
+                    .addComponent(PutButton))
                 .addContainerGap(321, Short.MAX_VALUE))
         );
 
@@ -296,10 +305,33 @@ public class Karel extends javax.swing.JFrame
         mainContainer.add(middleContainer, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("File");
+
+        New.setText("New");
+        jMenu1.add(New);
+
+        Save.setText("Save");
+        jMenu1.add(Save);
+
+        Close.setText("Close");
+        Close.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                CloseActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Close);
+
+        jMenuItem4.setText("jMenuItem4");
+        jMenu1.add(jMenuItem4);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Help");
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -317,46 +349,51 @@ public class Karel extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton3ActionPerformed
-    {//GEN-HEADEREND:event_jButton3ActionPerformed
+    private void ButtonModeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ButtonModeActionPerformed
+    {//GEN-HEADEREND:event_ButtonModeActionPerformed
         manualPanel.setVisible(false);
         buttonPanel.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_ButtonModeActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton4ActionPerformed
-    {//GEN-HEADEREND:event_jButton4ActionPerformed
+    private void GoButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_GoButtonActionPerformed
+    {//GEN-HEADEREND:event_GoButtonActionPerformed
         world.choiceMade("go");
         world.repaint();
         buttonPanel.setVisible(false);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_GoButtonActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton5ActionPerformed
-    {//GEN-HEADEREND:event_jButton5ActionPerformed
+    private void LeftButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_LeftButtonActionPerformed
+    {//GEN-HEADEREND:event_LeftButtonActionPerformed
         world.choiceMade("left");
         world.repaint();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_LeftButtonActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton6ActionPerformed
-    {//GEN-HEADEREND:event_jButton6ActionPerformed
+    private void RightButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_RightButtonActionPerformed
+    {//GEN-HEADEREND:event_RightButtonActionPerformed
         world.choiceMade("right");
         world.repaint();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_RightButtonActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton8ActionPerformed
-    {//GEN-HEADEREND:event_jButton8ActionPerformed
+    private void GetButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_GetButtonActionPerformed
+    {//GEN-HEADEREND:event_GetButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_GetButtonActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton9ActionPerformed
-    {//GEN-HEADEREND:event_jButton9ActionPerformed
+    private void PutButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_PutButtonActionPerformed
+    {//GEN-HEADEREND:event_PutButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_PutButtonActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton10ActionPerformed
-    {//GEN-HEADEREND:event_jButton10ActionPerformed
+    private void ManualModeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ManualModeActionPerformed
+    {//GEN-HEADEREND:event_ManualModeActionPerformed
         manualPanel.setVisible(true);
         buttonPanel.setVisible(false);
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_ManualModeActionPerformed
+
+    private void CloseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_CloseActionPerformed
+    {//GEN-HEADEREND:event_CloseActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_CloseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -398,25 +435,33 @@ public class Karel extends javax.swing.JFrame
         {
             public void run()
             {
+                // Create a new karel world 
                 Karel karel = new Karel();
                 karel.setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonMode;
+    private javax.swing.JMenuItem Close;
+    private javax.swing.JButton GetButton;
+    private javax.swing.JButton GoButton;
+    private javax.swing.JButton LeftButton;
+    private javax.swing.JButton ManualMode;
+    private javax.swing.JMenuItem New;
+    private javax.swing.JButton PutButton;
+    private javax.swing.JButton RightButton;
+    private javax.swing.JButton Run;
+    private javax.swing.JMenuItem Save;
+    private javax.swing.JButton Stop;
     private javax.swing.JPanel bottomSubContainer;
     private javax.swing.JPanel buttonPanel;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
