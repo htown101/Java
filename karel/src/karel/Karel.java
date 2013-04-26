@@ -64,7 +64,6 @@ public class Karel extends javax.swing.JFrame
         New = new javax.swing.JMenuItem();
         Save = new javax.swing.JMenuItem();
         Close = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
@@ -307,6 +306,13 @@ public class Karel extends javax.swing.JFrame
         jMenu1.setText("File");
 
         New.setText("New");
+        New.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                NewActionPerformed(evt);
+            }
+        });
         jMenu1.add(New);
 
         Save.setText("Save");
@@ -321,9 +327,6 @@ public class Karel extends javax.swing.JFrame
             }
         });
         jMenu1.add(Close);
-
-        jMenuItem4.setText("jMenuItem4");
-        jMenu1.add(jMenuItem4);
 
         jMenuBar1.add(jMenu1);
 
@@ -376,12 +379,12 @@ public class Karel extends javax.swing.JFrame
 
     private void GetButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_GetButtonActionPerformed
     {//GEN-HEADEREND:event_GetButtonActionPerformed
-        // TODO add your handling code here:
+        world.choiceMade("get");
     }//GEN-LAST:event_GetButtonActionPerformed
 
     private void PutButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_PutButtonActionPerformed
     {//GEN-HEADEREND:event_PutButtonActionPerformed
-        // TODO add your handling code here:
+        world.choiceMade("put");
     }//GEN-LAST:event_PutButtonActionPerformed
 
     private void ManualModeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ManualModeActionPerformed
@@ -394,6 +397,11 @@ public class Karel extends javax.swing.JFrame
     {//GEN-HEADEREND:event_CloseActionPerformed
         System.exit(0);
     }//GEN-LAST:event_CloseActionPerformed
+
+    private void NewActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_NewActionPerformed
+    {//GEN-HEADEREND:event_NewActionPerformed
+        
+    }//GEN-LAST:event_NewActionPerformed
 
     /**
      * @param args the command line arguments
@@ -461,7 +469,6 @@ public class Karel extends javax.swing.JFrame
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;

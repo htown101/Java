@@ -172,79 +172,90 @@ public class World extends JPanel
     {    
         //Get karels current direction
         char direction = karel.GetDirection();
-
-        if ("go".equals(choice)) //Attempt to move the player
-        {                
-            switch(direction)
-            {
-                case '^':
-                    handleMove(0,-SPACE);
-                    break;
-                case 'v':
-                    handleMove(0, SPACE);
-                    break;
-                case '>':
-                    handleMove(SPACE,0);
-                    break;
-                case '<':
-                    handleMove(-SPACE,0);
-                    break;
-            }
-
+        switch (choice)
+        {
+            case "go":
+                switch(direction)
+                {
+                    case '^':
+                        handleMove(0,-SPACE);
+                        break;
+                    case 'v':
+                        handleMove(0, SPACE);
+                        break;
+                    case '>':
+                        handleMove(SPACE,0);
+                        break;
+                    case '<':
+                        handleMove(-SPACE,0);
+                        break;
+                }
+                break;
+            case "left":
+                switch(direction)
+                {
+                    case '^':
+                        karel.SetDirection('<');
+                        karel.ChangeImage("left");
+                        break;
+                    case 'v':
+                        karel.SetDirection('>');
+                        karel.ChangeImage("right");
+                        break;
+                    case '>':
+                        karel.SetDirection('^');
+                        karel.ChangeImage("up");
+                        break;
+                    case '<':
+                        karel.SetDirection('v');
+                        karel.ChangeImage("down");
+                        break;
+                }
+                break;
+            case "right":
+                switch(direction)
+                {
+                    case '^':
+                        karel.SetDirection('>');
+                        karel.ChangeImage("right");
+                        break;
+                    case 'v':
+                        karel.SetDirection('<');
+                        karel.ChangeImage("left");
+                        break;
+                    case '>':
+                        karel.SetDirection('v');
+                        karel.ChangeImage("down");
+                        break;
+                    case '<':
+                        karel.SetDirection('^');
+                        karel.ChangeImage("up");
+                        break;
+                }
+                break;
+            case "get":
+                //if the gem is on the same space as karel
+                if (karel.isGemCollision(karel.GetX(), karel.GetY(), gems) != -1)
+                {
+                    //pick up the gem
+                    gems.remove(karel.isGemCollision(karel.GetX(), karel.GetY(), gems));
+                    karel.addGem();
+                }
+                break;
+            case "put":
+                //pick up the gem
+                if(karel.getGemCount() > 0)
+                {
+                    karel.removeGem();
+                    Gem gem = new Gem(karel.GetX(),karel.GetY());
+                    gems.add(gem);
+                }
+                break;
+            case "manual":
+                break;
         }
-        else if ("left".equals(choice)) //Turn the player left
-        {                
-            switch(direction)
-            {
-                case '^':
-                    karel.SetDirection('<');
-                    karel.ChangeImage("left");
-                    break;
-                case 'v':
-                    karel.SetDirection('>');
-                    karel.ChangeImage("right");
-                    break;
-                case '>':
-                    karel.SetDirection('^');
-                    karel.ChangeImage("up");
-                    break;
-                case '<':
-                    karel.SetDirection('v');
-                    karel.ChangeImage("down");
-                    break;
-            }
-        }
-        else if ("right".equals(choice))//turn the player right
-        {                
-            switch(direction)
-            {
-                case '^':
-                    karel.SetDirection('>');
-                    karel.ChangeImage("right");
-                    break;
-                case 'v':
-                    karel.SetDirection('<');
-                    karel.ChangeImage("left");
-                    break;
-                case '>':
-                    karel.SetDirection('v');
-                    karel.ChangeImage("down");
-                    break;
-                case '<':
-                    karel.SetDirection('^');
-                    karel.ChangeImage("up");
-                    break;
-            }
-        }
-        
-       else if ("manual".equals(choice)) //Get multiple commands
-       {
-            //actions();
-       }
-
-        repaint();
+        this.repaint();
     }
-     
     public void handleMove(int x, int y)
     {
         //Get where karel wants to move
@@ -262,20 +273,20 @@ public class World extends JPanel
             {
                 karel.move(x,y);
                 isRunning = false;
-                //System.out.println("You have won!");
             }
-        }
-        else if (karel.isGemCollision(newX, newY, gems) != -1)
-        {
-            //pick up the gem and move karel
-            gems.remove(karel.isGemCollision(newX, newY, gems));
-            karel.move(x, y);
         }
         else
         {
             //move karel
             karel.move(x, y);
         }
+    }
+    public void RestartLevel()
+    {
+       gems.clear();
+       walls.clear();
+       initWorld(); 
+       
     }
     
 }

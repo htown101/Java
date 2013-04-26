@@ -86,7 +86,6 @@ public class Entity
                  return number;
              }
         }
-     
         //No collision
         return -1;
     }
@@ -99,4 +98,5 @@ public class Entity
         }     
         return false;
     }
+ 
 }

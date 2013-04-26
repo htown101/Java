@@ -7,7 +7,7 @@ import javax.swing.*;
 public class Player extends Entity
 {
     char direction; //karels icon ^ > < v
-    
+    private int gemBag; //how many gems karel is holding
     public Player(int x, int y) 
     {
         super(x, y);
@@ -26,7 +26,19 @@ public class Player extends Entity
         this.SetX(newX);
         this.SetY(newY);
     }
+    public void addGem()
+    {
+        this.gemBag++;
+    }
     
+    public void removeGem()
+    {
+        this.gemBag--;
+    }
+    public int getGemCount()
+    {
+        return this.gemBag;
+    }
     public char GetDirection()
     {
         return this.direction;
