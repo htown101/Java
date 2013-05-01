@@ -13,7 +13,6 @@ public class Wall extends Entity
     public Wall(int x,int y)
     {
         super(x,y);
-        
         URL loc = this.getClass().getResource("wall.png");
         ImageIcon iia = new ImageIcon(loc);
         image = iia.getImage();

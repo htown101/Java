@@ -9,7 +9,6 @@ public class Entity
     //change x back to private and update collision
     protected int x;
     protected int y;
-    private final int SPACE = 31;
     private Image image;
     
     //constructor sets object position
@@ -19,13 +18,11 @@ public class Entity
         this.y = y;
     }
     
-    public Image getImage() 
-    {
+    public Image getImage() {
         return this.image;
     }
 
-    public void setImage(Image img) 
-    {
+    public void setImage(Image img) {
         image = img;
     }
     
@@ -86,11 +83,12 @@ public class Entity
                  return number;
              }
         }
+     
         //No collision
         return -1;
     }
     
-    public boolean isHomeCollision(int x, int y,home Home)
+     public boolean isHomeCollision(int x, int y,home Home)
     {       
         if ( Home.x == x && Home.y == y)
         {
@@ -98,5 +96,4 @@ public class Entity
         }     
         return false;
     }
- 
 }

@@ -7,10 +7,13 @@ import javax.swing.*;
 public class Player extends Entity
 {
     char direction; //karels icon ^ > < v
+    
     private int gemBag; //how many gems karel is holding
+    private int StepCounter;
     public Player(int x, int y) 
     {
         super(x, y);
+        StepCounter = 1; 
         direction ='^';
         URL loc = this.getClass().getResource("up.png");
         ImageIcon iia = new ImageIcon(loc);
@@ -26,6 +29,11 @@ public class Player extends Entity
         this.SetX(newX);
         this.SetY(newY);
     }
+    public int GetSteps()
+    {
+        return this.StepCounter++;
+    }
+    
     public void addGem()
     {
         this.gemBag++;
@@ -39,6 +47,7 @@ public class Player extends Entity
     {
         return this.gemBag;
     }
+    
     public char GetDirection()
     {
         return this.direction;

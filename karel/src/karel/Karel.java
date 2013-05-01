@@ -1,7 +1,15 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package karel;
-
+/**
+ *
+ * @author Sam
+ */
 public class Karel extends javax.swing.JFrame
 {
+    private final int OFFSET = 0;
     /**
      * Creates new form Karel
      */
@@ -9,21 +17,16 @@ public class Karel extends javax.swing.JFrame
     {
         this.setTitle("Karel");
         initComponents();
-        manualPanel.setVisible(true);
-        buttonPanel.setVisible(false);
+        manualPanel.setVisible(false);
+        buttonPanel.setVisible(true);
         InitUI();
+        
     }
     
-    public void InitUI()
+    public void InitUI() 
     {
-        //Board board = new Board();
-        //add(board);
-
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setSize(board.getBoardWidth() + OFFSET,
-        //        board.getBoardHeight() + 2*OFFSET);
-        //setLocationRelativeTo(null);
-        //setTitle("Sokoban");
+        //edit
+        
     }
 
 
@@ -43,15 +46,19 @@ public class Karel extends javax.swing.JFrame
         ManualMode = new javax.swing.JButton();
         Run = new javax.swing.JButton();
         Stop = new javax.swing.JButton();
+        GemLabel = new javax.swing.JLabel();
+        gemcounter = new javax.swing.JLabel();
+        StepLabel = new javax.swing.JLabel();
+        Stepcounter = new javax.swing.JLabel();
         bottomSubContainer = new javax.swing.JPanel();
         middleContainer = new javax.swing.JPanel();
         leftContainer = new javax.swing.JPanel();
         buttonPanel = new javax.swing.JPanel();
-        GoButton = new javax.swing.JButton();
-        LeftButton = new javax.swing.JButton();
-        RightButton = new javax.swing.JButton();
-        GetButton = new javax.swing.JButton();
-        PutButton = new javax.swing.JButton();
+        Go = new javax.swing.JButton();
+        Left = new javax.swing.JButton();
+        Right = new javax.swing.JButton();
+        Get = new javax.swing.JButton();
+        Put = new javax.swing.JButton();
         manualPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -59,13 +66,13 @@ public class Karel extends javax.swing.JFrame
         jTextArea1 = new javax.swing.JTextArea();
         rightContainer = new javax.swing.JPanel();
         world = new karel.World();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        MenuBar = new javax.swing.JMenuBar();
+        SaveCodeChoice = new javax.swing.JMenu();
         New = new javax.swing.JMenuItem();
         Save = new javax.swing.JMenuItem();
         Close = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1006, 550));
@@ -100,8 +107,23 @@ public class Karel extends javax.swing.JFrame
         });
 
         Run.setText("Run");
+        Run.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                RunActionPerformed(evt);
+            }
+        });
 
         Stop.setText("Stop");
+
+        GemLabel.setText("Gems:");
+
+        gemcounter.setText("0");
+
+        StepLabel.setText("Steps:");
+
+        Stepcounter.setText("0");
 
         javax.swing.GroupLayout topSubContainerLayout = new javax.swing.GroupLayout(topSubContainer);
         topSubContainer.setLayout(topSubContainerLayout);
@@ -112,11 +134,19 @@ public class Karel extends javax.swing.JFrame
                 .addComponent(ButtonMode)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ManualMode)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Run)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Stop)
-                .addGap(0, 693, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 472, Short.MAX_VALUE)
+                .addComponent(StepLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Stepcounter)
+                .addGap(47, 47, 47)
+                .addComponent(GemLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gemcounter)
+                .addGap(93, 93, 93))
         );
         topSubContainerLayout.setVerticalGroup(
             topSubContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +155,11 @@ public class Karel extends javax.swing.JFrame
                     .addComponent(ButtonMode)
                     .addComponent(ManualMode)
                     .addComponent(Run)
-                    .addComponent(Stop))
+                    .addComponent(Stop)
+                    .addComponent(GemLabel)
+                    .addComponent(gemcounter)
+                    .addComponent(StepLabel)
+                    .addComponent(Stepcounter))
                 .addGap(0, 3, Short.MAX_VALUE))
         );
 
@@ -161,48 +195,48 @@ public class Karel extends javax.swing.JFrame
 
         buttonPanel.setVisible(false);
 
-        GoButton.setText("Go");
-        GoButton.addActionListener(new java.awt.event.ActionListener()
+        Go.setText("Go");
+        Go.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                GoButtonActionPerformed(evt);
+                GoActionPerformed(evt);
             }
         });
 
-        LeftButton.setText("Left");
-        LeftButton.addActionListener(new java.awt.event.ActionListener()
+        Left.setText("Left");
+        Left.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                LeftButtonActionPerformed(evt);
+                LeftActionPerformed(evt);
             }
         });
 
-        RightButton.setText("Right");
-        RightButton.addActionListener(new java.awt.event.ActionListener()
+        Right.setText("Right");
+        Right.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                RightButtonActionPerformed(evt);
+                RightActionPerformed(evt);
             }
         });
 
-        GetButton.setText("Get");
-        GetButton.addActionListener(new java.awt.event.ActionListener()
+        Get.setText("Get");
+        Get.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                GetButtonActionPerformed(evt);
+                GetActionPerformed(evt);
             }
         });
 
-        PutButton.setText("Put");
-        PutButton.addActionListener(new java.awt.event.ActionListener()
+        Put.setText("Put");
+        Put.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                PutButtonActionPerformed(evt);
+                PutActionPerformed(evt);
             }
         });
 
@@ -214,35 +248,35 @@ public class Karel extends javax.swing.JFrame
                 .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(buttonPanelLayout.createSequentialGroup()
                         .addGap(61, 61, 61)
-                        .addComponent(LeftButton)
+                        .addComponent(Left)
                         .addGap(71, 71, 71)
-                        .addComponent(RightButton))
+                        .addComponent(Right))
                     .addGroup(buttonPanelLayout.createSequentialGroup()
                         .addGap(129, 129, 129)
-                        .addComponent(GoButton))
+                        .addComponent(Go))
                     .addGroup(buttonPanelLayout.createSequentialGroup()
                         .addGap(80, 80, 80)
-                        .addComponent(GetButton)
+                        .addComponent(Get)
                         .addGap(41, 41, 41)
-                        .addComponent(PutButton)))
+                        .addComponent(Put)))
                 .addContainerGap(149, Short.MAX_VALUE))
         );
 
-        buttonPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {GetButton, GoButton, LeftButton, PutButton, RightButton});
+        buttonPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Get, Go, Left, Put, Right});
 
         buttonPanelLayout.setVerticalGroup(
             buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buttonPanelLayout.createSequentialGroup()
                 .addGap(58, 58, 58)
-                .addComponent(GoButton)
+                .addComponent(Go)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LeftButton)
-                    .addComponent(RightButton))
+                    .addComponent(Left)
+                    .addComponent(Right))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(GetButton)
-                    .addComponent(PutButton))
+                    .addComponent(Get)
+                    .addComponent(Put))
                 .addContainerGap(321, Short.MAX_VALUE))
         );
 
@@ -303,9 +337,9 @@ public class Karel extends javax.swing.JFrame
 
         mainContainer.add(middleContainer, java.awt.BorderLayout.CENTER);
 
-        jMenu1.setText("File");
+        SaveCodeChoice.setText("File");
 
-        New.setText("New");
+        New.setText("New Map from File");
         New.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -313,10 +347,10 @@ public class Karel extends javax.swing.JFrame
                 NewActionPerformed(evt);
             }
         });
-        jMenu1.add(New);
+        SaveCodeChoice.add(New);
 
         Save.setText("Save");
-        jMenu1.add(Save);
+        SaveCodeChoice.add(Save);
 
         Close.setText("Close");
         Close.addActionListener(new java.awt.event.ActionListener()
@@ -326,17 +360,25 @@ public class Karel extends javax.swing.JFrame
                 CloseActionPerformed(evt);
             }
         });
-        jMenu1.add(Close);
+        SaveCodeChoice.add(Close);
 
-        jMenuBar1.add(jMenu1);
+        MenuBar.add(SaveCodeChoice);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jMenu2.setText("Help");
 
-        jMenu3.setText("Help");
-        jMenuBar1.add(jMenu3);
+        jMenuItem3.setText("Open Help File (pdf)");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
 
-        setJMenuBar(jMenuBar1);
+        MenuBar.add(jMenu2);
+
+        setJMenuBar(MenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -358,50 +400,62 @@ public class Karel extends javax.swing.JFrame
         buttonPanel.setVisible(true);
     }//GEN-LAST:event_ButtonModeActionPerformed
 
-    private void GoButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_GoButtonActionPerformed
-    {//GEN-HEADEREND:event_GoButtonActionPerformed
+    private void GoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_GoActionPerformed
+    {//GEN-HEADEREND:event_GoActionPerformed
         world.choiceMade("go");
-        world.repaint();
+        Stepcounter.setText("" + world.getStepCount());
         buttonPanel.setVisible(false);
-    }//GEN-LAST:event_GoButtonActionPerformed
+    }//GEN-LAST:event_GoActionPerformed
 
-    private void LeftButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_LeftButtonActionPerformed
-    {//GEN-HEADEREND:event_LeftButtonActionPerformed
+    private void LeftActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_LeftActionPerformed
+    {//GEN-HEADEREND:event_LeftActionPerformed
         world.choiceMade("left");
-        world.repaint();
-    }//GEN-LAST:event_LeftButtonActionPerformed
+    }//GEN-LAST:event_LeftActionPerformed
 
-    private void RightButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_RightButtonActionPerformed
-    {//GEN-HEADEREND:event_RightButtonActionPerformed
+    private void RightActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_RightActionPerformed
+    {//GEN-HEADEREND:event_RightActionPerformed
         world.choiceMade("right");
-        world.repaint();
-    }//GEN-LAST:event_RightButtonActionPerformed
+    }//GEN-LAST:event_RightActionPerformed
 
-    private void GetButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_GetButtonActionPerformed
-    {//GEN-HEADEREND:event_GetButtonActionPerformed
+    private void GetActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_GetActionPerformed
+    {//GEN-HEADEREND:event_GetActionPerformed
         world.choiceMade("get");
-    }//GEN-LAST:event_GetButtonActionPerformed
+        gemcounter.setText("" + world.getPlayerGem());
+    }//GEN-LAST:event_GetActionPerformed
 
-    private void PutButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_PutButtonActionPerformed
-    {//GEN-HEADEREND:event_PutButtonActionPerformed
+    private void PutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_PutActionPerformed
+    {//GEN-HEADEREND:event_PutActionPerformed
         world.choiceMade("put");
-    }//GEN-LAST:event_PutButtonActionPerformed
+        gemcounter.setText("" + world.getPlayerGem());
+    }//GEN-LAST:event_PutActionPerformed
 
     private void ManualModeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ManualModeActionPerformed
     {//GEN-HEADEREND:event_ManualModeActionPerformed
         manualPanel.setVisible(true);
         buttonPanel.setVisible(false);
+        world.actions();
     }//GEN-LAST:event_ManualModeActionPerformed
+
+    private void NewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewActionPerformed
+    //New file - insert a new map 
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NewActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    //Open help file (write help file...)
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void RunActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_RunActionPerformed
+    {//GEN-HEADEREND:event_RunActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RunActionPerformed
 
     private void CloseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_CloseActionPerformed
     {//GEN-HEADEREND:event_CloseActionPerformed
         System.exit(0);
     }//GEN-LAST:event_CloseActionPerformed
-
-    private void NewActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_NewActionPerformed
-    {//GEN-HEADEREND:event_NewActionPerformed
-        
-    }//GEN-LAST:event_NewActionPerformed
 
     /**
      * @param args the command line arguments
@@ -443,7 +497,6 @@ public class Karel extends javax.swing.JFrame
         {
             public void run()
             {
-                // Create a new karel world 
                 Karel karel = new Karel();
                 karel.setVisible(true);
             }
@@ -452,23 +505,27 @@ public class Karel extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonMode;
     private javax.swing.JMenuItem Close;
-    private javax.swing.JButton GetButton;
-    private javax.swing.JButton GoButton;
-    private javax.swing.JButton LeftButton;
+    private javax.swing.JLabel GemLabel;
+    private javax.swing.JButton Get;
+    private javax.swing.JButton Go;
+    private javax.swing.JButton Left;
     private javax.swing.JButton ManualMode;
+    private javax.swing.JMenuBar MenuBar;
     private javax.swing.JMenuItem New;
-    private javax.swing.JButton PutButton;
-    private javax.swing.JButton RightButton;
+    private javax.swing.JButton Put;
+    private javax.swing.JButton Right;
     private javax.swing.JButton Run;
     private javax.swing.JMenuItem Save;
+    private javax.swing.JMenu SaveCodeChoice;
+    private javax.swing.JLabel StepLabel;
+    private javax.swing.JLabel Stepcounter;
     private javax.swing.JButton Stop;
     private javax.swing.JPanel bottomSubContainer;
     private javax.swing.JPanel buttonPanel;
+    private javax.swing.JLabel gemcounter;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
